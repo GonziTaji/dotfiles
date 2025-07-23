@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# === Configuración ===
+USER="yoghurt"
+HOST="villaseca.local"
+REMOTE_BASE="/srv/media"
+
+# === Uso ===
+if [ "$#" -lt 1 ] || [ "$1" = "--help" ]; then
+  echo "Uso:"
+  echo "  $0 subir <origen_local> [destino_relativo_en_server]"
+  echo "  $0 bajar <origen_relativo_en_server> [destino_local]"
+  echo "  $0 listar [ruta_relativa_en_server]"
+  echo ""
+  echo "Ruta base remota: $USER@$HOST:$REMOTE_BASE"
+  exit 0
+fi
+
+MODE="$1"
+SRC="$2"
+DST="$3"
+
+RSYNC_OPTS="-avh --no-owner --no-group --progress"
+
+if [ "$MODE" = "subir" ]; then
+  DESTINO="$USER@$HOST:$REMOTE_BASE/${DST:-}"
+  echo ""
+  echo "➡️  Subiendo '$SRC' a '$DESTINO'..."
+  echo ""
+  echo "> rsync $RSYNC_OPTS '$SRC' '$DESTINO'"
+  echo ""
+  rsync $RSYNC_OPTS "$SRC" "$DESTINO"
+
+elif [ "$MODE" = "bajar" ]; then
+  ORIGEN="$USER@$HOST:$REMOTE_BASE/$SRC"
+  DESTINO="${DST:-.}"
+  echo ""
+  echo "⬅️  Bajando '$ORIGEN' a '$DESTINO'..."
+  echo ""
+  echo "\n > rsync $RSYNC_OPTS '$ORIGEN' '$DESTINO'\n"
+  echo ""
+  rsync $RSYNC_OPTS "$ORIGEN" "$DESTINO"
+
+elif [ "$MODE" = "listar" ]; then
+  LISTAR_PATH="${SRC:-.}"
+  echo "📁 Listando contenido de '$REMOTE_BASE/$LISTAR_PATH' en $HOST..."
+  ssh "$USER@$HOST" "ls -lhA '$REMOTE_BASE/$LISTAR_PATH'"
+
+else
+  echo "❌ Modo desconocido: $MODE (usa 'subir', 'bajar' o 'listar')"
+  exit 1
+fi
+

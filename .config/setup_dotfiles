@@ -4,13 +4,22 @@
 
 REPO = "https://github.com/GonziTaji/dotfiles"
 
-# Clonamos el repo
 git clone --bare $REPO $HOME/.dotfiles
 
+function dotfiles {
+   /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
+}
 
-# Seteamos el alias para manejar el repo dotfiles (necesario si al clonar sobreescribo mi .bashrc?)
-echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> $HOME/.bashrc
-source $HOME/.bashrc
+dotfiles checkout
 
-# Quitamos los untracked files del status
-/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
+if [ $? = 0 ]; then
+  echo "Checked out dotfiles.";
+  else
+    echo "Backing up pre-existing dot files in dotfiles-backup.";
+    mkdir -p .dotfiles-backup
+    dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .dotfiles-backup/{}
+fi;
+
+dotfiles checkout
+
+dotfiles config status.showUntrackedFiles no

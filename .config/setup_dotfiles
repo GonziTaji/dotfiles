@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Basado en https://www.atlassian.com/git/tutorials/dotfiles
+
+REPO = "https://github.com/GonziTaji/dotfiles"
+
+# Clonamos el repo
+git clone --bare $REPO $HOME/.dotfiles
+
+
+# Seteamos el alias para manejar el repo dotfiles (necesario si al clonar sobreescribo mi .bashrc?)
+echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> $HOME/.bashrc
+source $HOME/.bashrc
+
+# Quitamos los untracked files del status
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no

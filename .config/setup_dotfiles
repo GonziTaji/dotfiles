@@ -7,7 +7,7 @@ REPO = "https://github.com/GonziTaji/dotfiles"
 git clone --bare $REPO $HOME/.dotfiles
 
 function dotfiles {
-   /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
+   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
 }
 
 dotfiles checkout

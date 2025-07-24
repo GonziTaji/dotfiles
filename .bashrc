@@ -68,4 +68,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 clear
-. "$HOME/.cargo/env"
+
+# No estoy seguro que es esto lol
+[ -s "$NVM_DIR/.cargo/env" ] && \. "$HOME/.cargo/env" 
+

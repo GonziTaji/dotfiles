@@ -21,7 +21,8 @@ vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- Highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup,
+  desc = "Highlight when yanking text",
+  group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
@@ -36,3 +37,7 @@ vim.opt.wildignore:append({ "*.o", "*.obj", "*.pyc", "*.class", "*.jar" })
 vim.keymap.set("n", "<C-a>", '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>.", '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
 
+-- Utils
+vim.keymap.set("n", "<space>x", ":.lua<CR>") -- execute current line
+vim.keymap.set("v", "<space>x", ":lua<CR>") -- execute selection
+vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>") -- source current file

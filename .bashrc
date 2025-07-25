@@ -76,7 +76,10 @@ clear
 # Cargar entorno de Rust si está disponible
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
-
-
 # Created by `pipx` on 2025-07-24 13:42:53
 export PATH="$PATH:/home/yoghurt/.local/bin"
+
+# Secrets
+if [ -f ~/.config/env/secrets ]; then
+    source ~/.config/env/secrets
+fi

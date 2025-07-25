@@ -5,10 +5,10 @@ vim.opt.scrolloff = 10
 vim.opt.sidescrolloff = 8
 
 -- Chars
+vim.opt.list = true
 vim.opt.listchars = {
     lead = "·",
-    tail = "·",
-    -- multispace = "·",
+    trail = "·"
 }
 
 -- Indentation

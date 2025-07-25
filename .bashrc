@@ -73,8 +73,9 @@ export NVM_DIR="$HOME/.nvm"
 
 clear
 
-# No estoy seguro que es esto lol
-. "$HOME/.cargo/env" 
+# Cargar entorno de Rust si está disponible
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
 
 
 # Created by `pipx` on 2025-07-24 13:42:53

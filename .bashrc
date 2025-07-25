@@ -62,6 +62,10 @@ export PATH=$PATH:/usr/local/go/bin
 # Created by `pipx` on 2025-06-24 22:35:34
 export PATH="$PATH:/root/.local/bin"
 
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+export HISTSIZE=-1      # save unlimited lines in history after session ends
+export HISTFILESIZE=-1   # file with unlimited lines
+
 # NVM path
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -70,5 +74,8 @@ export NVM_DIR="$HOME/.nvm"
 clear
 
 # No estoy seguro que es esto lol
-[ -s "$NVM_DIR/.cargo/env" ] && \. "$HOME/.cargo/env" 
+. "$HOME/.cargo/env" 
 
+
+# Created by `pipx` on 2025-07-24 13:42:53
+export PATH="$PATH:/home/yoghurt/.local/bin"

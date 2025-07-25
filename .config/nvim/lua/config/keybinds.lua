@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pe", vim.cmd.Ex)
-vim.keymap.set("n", "<leader>nh", ":nohlsearch<CR>", { desc = "Clear search highlights" })
+vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>", { desc = "Clear search highlights" })
 vim.keymap.set("n", "Y", "y$", { desc = "Yank to end of line" })
 
 -- Center screen while jumping
@@ -8,6 +8,8 @@ vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down (centered)" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
+vim.keymap.set("n", "<C-e>", "<C-e>+1", { desc = "Move down (follow movement)" })
+vim.keymap.set("n", "<C-y>", "<C-y>-1", { desc = "Move up (follow movement)" })
 
 -- Move lines up/down
 vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
@@ -41,3 +43,7 @@ vim.keymap.set("n", "<leader>.", '<cmd>lua vim.lsp.buf.code_action()<CR>', { nor
 vim.keymap.set("n", "<space>x", ":.lua<CR>") -- execute current line
 vim.keymap.set("v", "<space>x", ":lua<CR>") -- execute selection
 vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>") -- source current file
+
+-- Directory listing
+vim.g.netrw_liststyle = 3
+

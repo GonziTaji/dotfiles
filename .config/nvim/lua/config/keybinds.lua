@@ -23,27 +23,18 @@ vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- Highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight when yanking text",
-  group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+    desc = "Highlight when yanking text",
+    group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })
 
--- Command-line completion
-vim.opt.wildmenu = true
-vim.opt.wildmode = "longest:full,full"
-vim.opt.wildignore:append({ "*.o", "*.obj", "*.pyc", "*.class", "*.jar" })
-
 -- Errors/diagnostic
-vim.keymap.set("n", "<C-a>", '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>.", '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<C-a>", '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true, desc = "Show diagnostics in quickfix" })
+vim.keymap.set("n", "<leader>.", '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true, desc = "Show code actions" })
 
 -- Utils
-vim.keymap.set("n", "<space>x", ":.lua<CR>") -- execute current line
-vim.keymap.set("v", "<space>x", ":lua<CR>") -- execute selection
-vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>") -- source current file
-
--- Directory listing
-vim.g.netrw_liststyle = 3
-
+vim.keymap.set("n", "<space>x", ":.lua<CR>", { desc = "Execute current line" })
+vim.keymap.set("v", "<space>x", ":lua<CR>", { desc = "Execute selection" })
+vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>", { desc = "Source current file" })

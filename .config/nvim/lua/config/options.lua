@@ -8,7 +8,11 @@ vim.opt.sidescrolloff = 8
 vim.opt.list = true
 vim.opt.listchars = {
     lead = "·",
-    trail = "·"
+    trail = "·",
+    tab = "→ ",
+    extends = "›",
+    precedes = "‹",
+    multispace = "·"
 }
 
 -- Indentation
@@ -24,11 +28,19 @@ vim.opt.colorcolumn = "100"
 vim.opt.showmatch = true
 vim.opt.wrap = false
 
+-- Command-line completion
+vim.opt.wildmenu = true
+vim.opt.wildmode = "longest:full,full"
+vim.opt.wildignore:append({ "*.o", "*.obj", "*.pyc", "*.class", "*.jar" })
+
+-- Directory listing
+vim.g.netrw_liststyle = 3
+
 -- Diagnostics
 vim.keymap.set('n', 'gK',
     function()
-      local new_config = not vim.diagnostic.config().virtual_lines
-      vim.diagnostic.config({ virtual_lines = new_config })
+        local new_config = not vim.diagnostic.config().virtual_lines
+        vim.diagnostic.config({ virtual_lines = new_config })
     end,
     { desc = 'Toggle diagnostic virtual_lines' }
 )

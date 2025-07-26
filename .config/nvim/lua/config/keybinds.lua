@@ -31,10 +31,17 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Errors/diagnostic
-vim.keymap.set("n", "<C-a>", '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true, desc = "Show diagnostics in quickfix" })
-vim.keymap.set("n", "<leader>.", '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true, desc = "Show code actions" })
+vim.keymap.set("n", "<C-a>", '<cmd>lua vim.diagnostic.setloclist()<CR>',
+    { noremap = true, silent = true, desc = "Show diagnostics in quickfix" })
+vim.keymap.set("n", "<leader>.", '<cmd>lua vim.lsp.buf.code_action()<CR>',
+    { noremap = true, silent = true, desc = "Show code actions" })
 
 -- Utils
 vim.keymap.set("n", "<space>x", ":.lua<CR>", { desc = "Execute current line" })
 vim.keymap.set("v", "<space>x", ":lua<CR>", { desc = "Execute selection" })
 vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>", { desc = "Source current file" })
+
+-- Terminal
+-- vim.keymap.set("t", "<C-w>q", function() vim.api.nvim_win_close(0, false) end, { desc = "Cierra la terminal" })
+vim.keymap.set("t", "<C-n>", [[<C-\><C-n>]], { noremap = true, silent = true })
+--vim.keymap.set("t", "<C-n>", '<cmd>echo "SHOASDLFKJ"<CR>', { noremap = true, silent = true })

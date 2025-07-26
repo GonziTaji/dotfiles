@@ -1,0 +1,99 @@
+vim.keymap.set("n", "<space>ntm", function()
+    vim.cmd.new()
+    vim.cmd.term()
+    vim.cmd.wincmd("J")
+    vim.api.nvim_win_set_height(0, 10)
+end
+, { desc = "Open terminal in a window below the current window" })
+
+local state = {
+    window = -1,
+    buffers = {},
+    last_open_index = nil
+}
+
+vim.api.nvim_create_user_command("Termcontrol", function(opts)
+    local str_args = opts.args or ''
+    local args = vim.split(str_args, " ")
+    local action = args[1]
+    -- El indice entregado, o el ultimo en abrir, o el siguiente buffer a crear
+    local buffer_index = tonumber(args[2]) or state.last_open_index or #state.buffers + 1
+
+    if buffer_index == nil then
+        for i = 1, #state.buffers + 2 do
+            if not state.buffers[i] then
+                buffer_index = i
+                break
+            end
+        end
+    end
+
+    if action == nil then
+        vim.notify("missing action after command Termcontrol. Expected open or close", vim.log.levels.ERROR)
+    end
+
+    if action == "close" then
+        if (args[2] == nil or state.last_open_index == buffer_index) and vim.api.nvim_win_is_valid(state.window) then
+            vim.api.nvim_win_hide(state.window)
+        else
+            vim.notify("Nothing to close", vim.log.levels.WARN)
+        end
+
+        return
+    end
+
+    local buf = nil
+    if state.buffers[buffer_index] and vim.api.nvim_buf_is_valid(state.buffers[buffer_index]) then
+        -- cerramos si no hay eleccion de terminal, o si el indice es el mismo que el actual y la ventana esta abierta
+        if (args[2] == nil or state.last_open_index == buffer_index) and vim.api.nvim_win_is_valid(state.window) then
+            vim.api.nvim_win_hide(state.window)
+            return
+        else
+            buf = state.buffers[buffer_index]
+            state.last_open_index = buffer_index
+        end
+    else
+        buf = vim.api.nvim_create_buf(false, true)
+        table.insert(state.buffers, buffer_index, buf)
+        state.last_open_index = buffer_index
+
+        vim.notify("New terminal created in position " .. buffer_index, vim.log.levels.INFO)
+    end
+
+    if not vim.api.nvim_win_is_valid(state.window) then
+        state.window = vim.api.nvim_open_win(buf, true, { split = 'below' })
+    else
+        vim.api.nvim_win_set_buf(state.window, buf)
+    end
+
+    if vim.bo[state.buffers[buffer_index]].buftype ~= "terminal" then
+        vim.cmd.terminal()
+    end
+end, {
+    nargs = "+",
+    complete = function(_, line)
+        -- local line = "Termcontrol open "
+        local commands = { "open", "close" }
+        local parts = vim.split(line, "%s+")
+        -- Si está escribiendo el primer argumento, completar acciones
+        local n = #parts - 2
+        if n == 0 then
+            return vim.tbl_filter(function(val)
+                return vim.startswith(val, parts[2])
+            end, commands)
+        end
+        -- Si ya escribió la acción, sugerir buffers
+        if n == 1 then
+            return "asdfa"
+            --[[local buffer_indexes = {}
+            for i = 0, #buffers + 1 do
+                table.insert(buffer_indexes, i)
+            end
+
+            return buffer_indexes
+        ]]
+        end
+
+        return {}
+    end
+})

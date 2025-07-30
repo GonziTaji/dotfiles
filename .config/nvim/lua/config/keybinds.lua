@@ -28,6 +28,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- Code completion (:help ins-completion
+-- vim.keymap.set({ "i", "x", "r" }, "<C-x><C-o>")
+
 -- Errors/diagnostic
 vim.keymap.set("n", "<C-a>", '<cmd>lua vim.diagnostic.setloclist()<CR>',
   { noremap = true, silent = true, desc = "Show diagnostics in quickfix" })

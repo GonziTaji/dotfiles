@@ -1,0 +1,32 @@
+taboverview revealer {
+    box-shadow: none;
+}
+
+tabbar tabbox {
+    margin: 0;
+    background: #292520;
+    min-height: 20px;
+    font-family: monospace;
+}
+
+tabbar tab {
+    margin: 0;
+    padding: 0;
+}
+
+tabbar tab:not(:selected) {
+    color: #2b2c28;
+    background: #DEAEA0;
+    opacity: 0.8;
+}
+
+tabbar tab:selected {
+    opacity: 1;
+    background: #ffdfd6;
+    color: #131515;
+}
+
+tabbar tab label {
+    font-size: 12px;
+    font-weight: bold;
+}

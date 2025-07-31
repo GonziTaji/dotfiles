@@ -1,0 +1,8 @@
+para probar estilos:
+GTK_DEBUG=interactive ghostty
+
+para ver temas:
+ghostty +list-themes
+
+para ver keybinds:
+ghostty +list-keybinds --default

@@ -1,9 +1,8 @@
 local autocmd = vim.api.nvim_create_autocmd
 
 local function can_format()
-    local bufnr = vim.api.nvim_get_current_buf()
-
-    local clients = vim.lsp.get_clients({ bufnr = bufnr })
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
     if #clients > 0 then
         local client = clients[1]
@@ -17,28 +16,33 @@ local function can_format()
     return false
 end
 
-
 local function format()
-    -- Usa prettier si hay config en el current cwd
-    -- Si no hay prettier usa el lsp para formatear
-    -- Si no hay lsp para formatear, notifica con un mensaje
-
     local cwd = vim.fn.getcwd()
     local matches = vim.fn.glob(cwd .. "/*prettier*", false, true)
 
     if #matches > 0 then
-        vim.notify("PRETTIER USED TO FORMAT")
+        vim.notify("formatted with Prettier")
         vim.cmd("Prettier")
         return
     end
 
     if can_format() then
-        vim.notify("LSP USED TO FORMAT")
+        vim.notify("formatted with LSP")
         vim.lsp.buf.format({ async = false })
         return
     end
 
-    vim.notify("NO LSP NOR PRETTIER USED TO FORMTAT")
+    local excluded_filetypes = { "hyprlang", "gitcommit" }
+
+    local bufnr = vim.api.nvim_get_current_buf()
+    local ft = vim.bo[bufnr].filetype
+
+    if vim.tbl_contains(excluded_filetypes, ft) then
+        vim.notify("not formatted. file is an excluded filetype")
+        return
+    end
+
+    vim.notify("formatting with motion")
 
     vim.cmd("normal! mx")
     vim.cmd("normal! ggVG==")

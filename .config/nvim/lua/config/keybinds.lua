@@ -15,17 +15,17 @@ vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
--- Better indenting in visual mode
-vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
-vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
+-- Better indenting in visual mode -- just use dot lol
+-- vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
+-- vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- Highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight when yanking text",
-  group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+    desc = "Highlight when yanking text",
+    group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })
 
 -- Code completion (:help ins-completion
@@ -33,9 +33,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- Errors/diagnostic
 vim.keymap.set("n", "<C-a>", '<cmd>lua vim.diagnostic.setloclist()<CR>',
-  { noremap = true, silent = true, desc = "Show diagnostics in quickfix" })
+{ noremap = true, silent = true, desc = "Show diagnostics in quickfix" })
 vim.keymap.set("n", "<leader>.", '<cmd>lua vim.lsp.buf.code_action()<CR>',
-  { noremap = true, silent = true, desc = "Show code actions" })
+{ noremap = true, silent = true, desc = "Show code actions" })
 
 -- Utils
 vim.keymap.set("n", "<space>x", ":.lua<CR>", { desc = "Execute current line" })

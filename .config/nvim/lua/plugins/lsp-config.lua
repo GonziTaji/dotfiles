@@ -60,11 +60,13 @@ return {
     },
     config = function()
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        local lspconfig = require("lspconfig")
 
-        require("lspconfig").ts_ls.setup({
+        lspconfig.ts_ls.setup({
             capabilities = capabilities
         })
-        require("lspconfig").lua_ls.setup({
+
+        lspconfig.lua_ls.setup({
             capabilities = capabilities
         })
     end,

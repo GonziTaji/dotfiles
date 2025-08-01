@@ -6,32 +6,35 @@ vim.g.colors_name = "earthsong"
 local set = vim.api.nvim_set_hl
 
 local p = {
-    black          = "#121418",
-    red            = "#c94234",
-    green          = "#85c54c",
-    yellow         = "#f5ae2e",
-    blue           = "#1398b9",
-    magenta        = "#d0633d",
-    cyan           = "#509552",
-    white          = "#e5c6aa",
-    bright_black   = "#675f54",
-    bright_red     = "#ff645a",
-    bright_green   = "#98e036",
-    bright_yellow  = "#e0d561",
-    bright_blue    = "#5fdaff",
-    bright_magenta = "#ff9269",
-    bright_cyan    = "#84f088",
-    bright_white   = "#f6f7ec",
-    bg             = "#292520",
-    fg             = "#e5c7a9",
-    cursor         = "#f6f7ec",
-    line_number_fg = "#524a43",
-    statusline_bg  = "#282421",
-    cursorline_bg  = "#3e3933",
-    comment_fg     = "#7a7267",
-    preproc_fg     = "#a0988e",
-    todo_fg        = "#a0988e",
-    pmenu_bg       = "#282421",
+    name                 = "Earthsong",
+    background           = "#292520",
+    black                = "#121418",
+    blue                 = "#1398B9",
+    bright_black         = "#675F54",
+    bright_blue          = "#5FDAFF",
+    bright_cyan          = "#84F088",
+    bright_green         = "#98E036",
+    bright_purple        = "#FF9269",
+    bright_red           = "#FF645A",
+    bright_white         = "#F6F7EC",
+    bright_yellow        = "#E0D561",
+    cursor_color         = "#F6F7EC",
+    cyan                 = "#509552",
+    foreground           = "#E5C7A9",
+    green                = "#85C54C",
+    purple               = "#D0633D",
+    red                  = "#C94234",
+    selection_background = "#121418",
+    white                = "#F6F7EC",
+    yellow               = "#F5AE2E",
+    selection_bg         = "#38342E",
+    line_number_fg       = "#524a43",
+    statusline_bg        = "#282421",
+    cursorline_bg        = "#3e3933",
+    comment_fg           = "#7a7267",
+    preproc_fg           = "#a0988e",
+    todo_fg              = "#a0988e",
+    pmenu_bg             = "#282421",
 }
 
 -- UI
@@ -64,13 +67,14 @@ set(0, "DiffDelete", { bg = p.red, fg = p.bright_black })
 set(0, "DiffChange", { bg = p.yellow, fg = p.bright_black })
 set(0, "DiffText", { bg = p.yellow, fg = p.bright_black, bold = true })
 
--- Treesitter
+--[[ Treesitter
 set(0, "@function", { link = "Function" })
 set(0, "@variable", { fg = p.fg })
 set(0, "@string", { link = "String" })
 set(0, "@keyword", { link = "Keyword" })
 set(0, "@type", { link = "Type" })
 set(0, "@comment", { link = "Comment" })
+]]
 
 -- Other
 set(0, "MatchParen", { fg = p.red, underline = true })

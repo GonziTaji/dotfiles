@@ -33,9 +33,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- Errors/diagnostic
 vim.keymap.set("n", "<C-a>", '<cmd>lua vim.diagnostic.setloclist()<CR>',
-{ noremap = true, silent = true, desc = "Show diagnostics in quickfix" })
+    { noremap = true, silent = true, desc = "Show diagnostics in quickfix" })
 vim.keymap.set("n", "<leader>.", '<cmd>lua vim.lsp.buf.code_action()<CR>',
-{ noremap = true, silent = true, desc = "Show code actions" })
+    { noremap = true, silent = true, desc = "Show code actions" })
 
 -- Utils
 vim.keymap.set("n", "<space>x", ":.lua<CR>", { desc = "Execute current line" })
@@ -44,3 +44,6 @@ vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>", { desc = "Source cur
 
 -- Terminal
 vim.keymap.set("t", "<C-n>", [[<C-\><C-n>]], { noremap = true, silent = true })
+
+-- LSP
+vim.keymap.set("n", "<space>lf", function() vim.lsp.buf.format() end, { desc = "Lsp Format" })

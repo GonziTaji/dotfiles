@@ -3,4 +3,4 @@ require("config.keybinds")
 require("config.options")
 require("config.autocmd")
 
-vim.cmd("colorscheme forestbones")
+vim.cmd("colorscheme everforest")

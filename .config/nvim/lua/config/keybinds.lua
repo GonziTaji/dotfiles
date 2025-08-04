@@ -31,6 +31,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Code completion (:help ins-completion
 -- vim.keymap.set({ "i", "x", "r" }, "<C-x><C-o>")
 
+--Quickfix
+vim.keymap.set("n", "q[", '<cmd>:cn<CR>', { noremap = true, silent = true, desc = "Quickfix next" })
+vim.keymap.set("n", "q]", '<cmd>:cp<CR>', { noremap = true, silent = true, desc = "Quickfix previous" })
+
 -- Errors/diagnostic
 vim.keymap.set("n", "<C-a>", '<cmd>lua vim.diagnostic.setloclist()<CR>',
     { noremap = true, silent = true, desc = "Show diagnostics in quickfix" })

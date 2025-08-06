@@ -1,8 +1,8 @@
 local autocmd = vim.api.nvim_create_autocmd
 
 local function can_format()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local clients = vim.lsp.get_clients({ bufnr = bufnr })
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
     if #clients > 0 then
         local client = clients[1]
@@ -18,7 +18,8 @@ end
 
 local function format()
     local cwd = vim.fn.getcwd()
-    local matches = vim.fn.glob(cwd .. "/*prettier*", false, true)
+    -- glob doesn't match dotfiles when using *
+    local matches = vim.fn.glob(cwd .. "/.prettier*") .. vim.fn.glob(cwd .. "/prettier*")
 
     if #matches > 0 then
         vim.notify("formatted with Prettier")
@@ -48,7 +49,6 @@ local function format()
     vim.cmd("normal! ggVG==")
     vim.cmd("normal! `x")
 end
-
 
 autocmd("BufWritePre", {
     callback = format

@@ -1,7 +1,9 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pe", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pe", '<CMD>:Oil<CR>', { desc = "Open filesystem with Oil" })
+vim.keymap.set("n", "<leader>mf", '<CMD>:lua MiniFiles.open()<CR>', { desc = "Open [F]ilesystem with [M]iniFiles" })
+vim.keymap.set("n", "<leader>mc", '<CMD>:lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>',
+    { desc = "Open [C]urrent path with [M]iniFiles" })
 vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>", { desc = "Clear search highlights" })
-vim.keymap.set("n", "Y", "y$", { desc = "Yank to end of line" })
 
 -- Center screen while jumping
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
@@ -14,26 +16,6 @@ vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
 vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
-
--- Better indenting in visual mode -- just use dot lol
--- vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
--- vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
-
--- Highlight yanked text
-vim.api.nvim_create_autocmd("TextYankPost", {
-    desc = "Highlight when yanking text",
-    group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-})
-
--- Code completion (:help ins-completion
--- vim.keymap.set({ "i", "x", "r" }, "<C-x><C-o>")
-
---Quickfix
-vim.keymap.set("n", "q[", '<cmd>:cn<CR>', { noremap = true, silent = true, desc = "Quickfix next" })
-vim.keymap.set("n", "q]", '<cmd>:cp<CR>', { noremap = true, silent = true, desc = "Quickfix previous" })
 
 -- Errors/diagnostic
 vim.keymap.set("n", "<C-a>", '<cmd>lua vim.diagnostic.setloclist()<CR>',

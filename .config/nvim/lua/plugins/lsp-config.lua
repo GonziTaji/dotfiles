@@ -69,5 +69,11 @@ return {
         lspconfig.lua_ls.setup({
             capabilities = capabilities
         })
+
+        lspconfig.ols.setup({})
+
+        lspconfig.clangd.setup({})
+
+        lspconfig.ols.setup({})
     end,
 }

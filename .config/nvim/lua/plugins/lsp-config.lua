@@ -75,5 +75,7 @@ return {
         lspconfig.clangd.setup({})
 
         lspconfig.ols.setup({})
+
+        lspconfig.ltex_plus.setup({})
     end,
 }

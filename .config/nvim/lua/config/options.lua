@@ -56,7 +56,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
     pattern = "*",
     callback = function()
         vim.diagnostic.config({
-            virtual_text = false
+            virtual_lines = false
         })
     end,
 })
@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
     pattern = "*",
     callback = function()
         vim.diagnostic.config({
-            virtual_text = true,
+            virtual_lines = true,
         })
     end,
 })

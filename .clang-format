@@ -1,0 +1,25 @@
+BasedOnStyle: LLVM
+
+IndentWidth: 4
+UseTab: Never
+ColumnLimit: 100
+
+BraceWrapping:
+  AfterStruct: true
+
+AllowAllParametersOfDeclarationOnNextLine: true
+
+BinPackParameters: false
+BinPackArguments: false
+
+PenaltyBreakBeforeFirstCallParameter: 1
+PenaltyReturnTypeOnItsOwnLine: 1000
+
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: InlineOnly
+
+IndentWrappedFunctionNames: false
+ContinuationIndentWidth: 4
+AlignAfterOpenBracket: false
+
+SpacesInParentheses: false

@@ -36,37 +36,45 @@ vim.opt.wildmode = "longest:full,full"
 vim.opt.wildignore:append({ "*.o", "*.obj", "*.pyc", "*.class", "*.jar" })
 
 -- Directory listing
-vim.g.netrw_liststyle = 3
+vim.g.netrw_preview         = 1
+vim.g.netrw_liststyle       = 3
+vim.g.netrw_winsize         = 30
 
 -- Diagnostics
-vim.keymap.set('n', 'gK',
-    function()
-        local new_config = not vim.diagnostic.config().virtual_lines
-        vim.diagnostic.config({ virtual_lines = new_config })
-    end,
-    { desc = 'Toggle diagnostic virtual_lines' }
-)
+-- vim.keymap.set('n', 'gK',
+--     function()
+--         local new_config = not vim.diagnostic.config().virtual_lines
+--         vim.diagnostic.config({ virtual_lines = new_config })
+--     end,
+--     { desc = 'Toggle diagnostic virtual_lines' }
+-- )
 
-vim.diagnostic.config({
-    virtual_text = true,
-})
+-- Misc
 
-vim.api.nvim_create_autocmd("InsertEnter", {
-    desc = "Show diagnostics on InsertEnter",
-    pattern = "*",
-    callback = function()
-        vim.diagnostic.config({
-            virtual_lines = false
-        })
-    end,
-})
+-- SQL by default uses <C-C> and I use that combination to go to normal mode very often
+vim.g.ftplugin_sql_omni_key = '<C-S>'
 
-vim.api.nvim_create_autocmd("InsertLeave", {
-    desc = "Show diagnostics on InsertLeave",
-    pattern = "*",
-    callback = function()
-        vim.diagnostic.config({
-            virtual_lines = true,
-        })
-    end,
-})
+
+-- vim.diagnostic.config({
+--     virtual_text = true,
+-- })
+
+-- vim.api.nvim_create_autocmd("InsertEnter", {
+--     desc = "Show diagnostics on InsertEnter",
+--     pattern = "*",
+--     callback = function()
+--         vim.diagnostic.config({
+--             virtual_lines = false
+--         })
+--     end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("InsertLeave", {
+--     desc = "Show diagnostics on InsertLeave",
+--     pattern = "*",
+--     callback = function()
+--         vim.diagnostic.config({
+--             virtual_lines = true,
+--         })
+--     end,
+-- })

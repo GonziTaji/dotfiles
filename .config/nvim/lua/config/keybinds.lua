@@ -1,8 +1,7 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pe", '<CMD>:Oil<CR>', { desc = "Open filesystem with Oil" })
-vim.keymap.set("n", "<leader>mf", '<CMD>:lua MiniFiles.open()<CR>', { desc = "Open [F]ilesystem with [M]iniFiles" })
-vim.keymap.set("n", "<leader>mc", '<CMD>:lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>',
-    { desc = "Open [C]urrent path with [M]iniFiles" })
+vim.keymap.set({"n", "v"}, "<leader>pe", '<CMD>:Oil --float<CR>')
+vim.keymap.set({"n", "v"}, "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
+
 vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>", { desc = "Clear search highlights" })
 
 -- Center screen while jumping
@@ -28,8 +27,8 @@ vim.keymap.set("n", "<space>x", ":.lua<CR>", { desc = "Execute current line" })
 vim.keymap.set("v", "<space>x", ":lua<CR>", { desc = "Execute selection" })
 vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>", { desc = "Source current file" })
 
--- Terminal
-vim.keymap.set("t", "<C-n>", [[<C-\><C-n>]], { noremap = true, silent = true })
+-- buffer manipulation
+vim.keymap.set("n", "<leader>bd", ":bd<CR>", { desc = "Delete current buffer" })
+vim.keymap.set("n", "<leader>bad", ":%bd<CR>", { desc = "Delete all buffers" })
+vim.keymap.set('n', '<leader>bod', ':%bd|e#|bd#<CR>', { desc = 'Close all buffers except current' })
 
--- LSP
-vim.keymap.set("n", "<space>lf", function() vim.lsp.buf.format() end, { desc = "Lsp Format" })

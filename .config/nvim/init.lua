@@ -1,6 +1,4 @@
-require("config.lazy")
-require("config.keybinds")
 require("config.options")
+require("config.keybinds")
 require("config.autocmd")
-
-vim.cmd("colorscheme everforest")
+require("pack")

@@ -8,20 +8,6 @@ vim.pack.add({
 require('blink.cmp').setup({
     keymap = {
         preset = "super-tab",
-
-        ['<Tab>'] = false,
-
-        ['<S-Tab>'] = {
-            function(cmp)
-                if cmp.snippet_active() then
-                    return cmp.accept()
-                else
-                    return cmp.select_and_accept()
-                end
-            end,
-            'snippet_forward',
-            'fallback'
-        },
     },
     ghost_text = { enabled = true },
 })

@@ -30,7 +30,7 @@ if [ -n "$force_color_prompt" ]; then
         # a case would tend to support setf rather than setaf.)
         # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
         # PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-        PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null)'; PS1='\[\e[38;5;252;2m\][\t]\[\e[0m\] \[\e[38;5;39m\]\w\[\e[0m\] \[\e[38;5;71m\](${PS1_CMD1})\[\e[0m\] '
+        PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null)'; PS1='\[\e[38;5;252;2m\][\t]\[\e[0m\] \[\e[38;5;39m\]\w\[\e[0m\] \[\e[38;5;71m\](${PS1_CMD1})\n\[\e[38;5;252;1;2m\]\$\[\e[0m\] '
     else
         PS1='\u@\h:\w\$ '
     fi
@@ -78,9 +78,14 @@ clear
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 # Created by `pipx` on 2025-07-24 13:42:53
-export PATH="$PATH:/home/yoghurt/.local/bin"
+export PATH="$PATH:~/.local/bin"
+
+# go
+export PATH=$PATH:$(go env GOPATH)/bin
 
 # Secrets
 if [ -f ~/.config/env/secrets ]; then
     source ~/.config/env/secrets
 fi
+
+source /usr/share/nvm/init-nvm.sh

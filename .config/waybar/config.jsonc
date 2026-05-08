@@ -1,12 +1,6 @@
-// -*- mode: jsonc -*-
 {
-    // "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    "spacing": 0, // Gaps between modules (4px)
+    "spacing": 0,
     "margin": "4 10 0 10",
-    // Choose the order of the modules
     "modules-left": [
         "hyprland/workspaces",
         "hyprland/window",
@@ -16,16 +10,16 @@
         "clock"
     ],
     "modules-right": [
+        "tray",
+        "memory",
+        "cpu",
         "pulseaudio",
         "network",
-        "power-profiles-daemon",
-        "cpu",
-        "memory",
-        // "temperature",
         "keyboard-state",
         "hyprland/language",
-        "tray",
-        "custom/power"
+        "battery#bat0",
+        "battery#bat1",
+        "ac"
     ],
     "keyboard-state": {
         "capslock": true,
@@ -36,32 +30,16 @@
         }
     },
     "tray": {
-        // "icon-size": 21,
-        // "spacing": 10,
         "icons": {
             "blueman": "bluetooth"
-        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
         }
     },
     "clock": {
-        // "timezone": "America/New_York",
         "tooltip-format": "<tt><big>{calendar}</big></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
-    "cpu": {
-        "format": "{usage}% ",
-        "tooltip": false
-    },
     "memory": {
         "format": "{}% "
-    },
-    "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
     },
     "power-profiles-daemon": {
         "format": "{icon}",
@@ -75,7 +53,6 @@
         }
     },
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": " {signalStrength}%",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{essid} {ifname} via {gwaddr} ",
@@ -84,7 +61,6 @@
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
@@ -106,12 +82,43 @@
         "format" : "⏻ ",
         "tooltip": false,
         "menu": "on-click",
-        "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
+        "menu-file": "$HOME/.config/waybar/power_menu.xml",
         "menu-actions": {
             "shutdown": "shutdown",
             "reboot": "reboot",
             "suspend": "systemctl suspend",
             "hibernate": "systemctl hibernate"
         }
+    },
+    "battery#bat0": {
+        "bat": "BAT0",
+        "format": "{icon}",
+        "format-time": "{H}h {M}m",
+        "tooltip-format": "{capacity}% ({time})",
+        "tooltip-format-full": "Full",
+        "interval": 20,
+        "format-icons": {
+            "default": [ "󰂃", "󰂎", "󰁻", "󰁽", "󰁿", "󰂁", "󰁹" ],
+            "charging": [ "󰢟", "󰂆", "󰂈", "󰂉", "󰂊 " ]
+        }
+    },
+    "battery#bat1": {
+        "bat": "BAT1",
+        "format": "{icon}",
+        "format-time": "{H}h {M}m",
+        "tooltip-format": "{capacity}% ({time})",
+        "tooltip-format-full": "Full",
+        "interval": 20,
+        "format-icons": {
+            "default": [ "󰂃", "󰂎", "󰁻", "󰁽", "󰁿", "󰂁", "󰁹" ],
+            "charging": [ "󰢟", "󰂆", "󰂈", "󰂉", "󰂊" ]
+        }
+    },
+
+    "ac": {
+        "type": "custom/script",
+        "interval": 5,
+        "exec": "cat /sys/class/power_supply/AC/online | awk '{print ($1==1)?\"AC\":\"\"}'",
+        "tooltip": false
     }
 }

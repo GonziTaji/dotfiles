@@ -29,6 +29,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "100"
 vim.opt.showmatch = true
 vim.opt.wrap = false
+vim.lsp.document_color.enable(true, nil, { style = 'virtual' })
 
 -- Command-line completion
 vim.opt.wildmenu = true

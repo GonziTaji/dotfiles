@@ -1,15 +1,21 @@
 [user]
-	name = yogusita
-	email = gonzalo.tajmuch@gmail.com
+    name = yogu-thinkpad
+    email = gonzalo.tajmuch@gmail.com
 [credential "https://github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+    helper = 
+    helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+    helper = 
+    helper = !/usr/bin/gh auth git-credential
 [core]
-	editor = nvim
+    editor = nvim
 [alias]
-	adog = log --all --decorate --oneline --graph
+    adog = log --all --decorate --oneline --graph
+    ane = commit  --amend --no-edit
+	ss = status --short
 [init]
-	defaultBranch = main
+    defaultBranch = main
+[push]
+    autoSetupRemote = true
+[diff]
+    tool = vimdiff

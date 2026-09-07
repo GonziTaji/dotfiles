@@ -1,6 +1,12 @@
 vim.g.mapleader = " "
-vim.keymap.set({"n", "v"}, "<leader>pe", '<CMD>:Oil --float<CR>')
-vim.keymap.set({"n", "v"}, "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
+
+vim.keymap.set({ "n", "v" }, "<leader>pe", function() require 'mini.files'.open() end, { desc = "Open minifiles" })
+vim.keymap.set({ "n", "v" }, "<leader>mc", function() require 'mini.files'.open(vim.api.nvim_buf_get_name(0), true) end,
+    { desc = "Open minifiles in buffer's dir" })
+vim.keymap.set({ "n", "v" }, "-", function() require 'mini.files'.open(vim.api.nvim_buf_get_name(0), true) end,
+    { desc = "Open minifiles in buffer's dir" })
+
+-- vim.keymap.set({"n", "v"}, "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 
 vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>", { desc = "Clear search highlights" })
 
@@ -31,4 +37,3 @@ vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>", { desc = "Source cur
 vim.keymap.set("n", "<leader>bd", ":bd<CR>", { desc = "Delete current buffer" })
 vim.keymap.set("n", "<leader>bad", ":%bd<CR>", { desc = "Delete all buffers" })
 vim.keymap.set('n', '<leader>bod', ':%bd|e#|bd#<CR>', { desc = 'Close all buffers except current' })
-
